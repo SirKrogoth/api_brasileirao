@@ -1,13 +1,13 @@
 import express, { Router } from 'express';
 import helmet from 'helmet';
 import brasileiraoRoute from './routes/brasileiraoRoute';
+import cors from 'cors';
 
 const app = express();
-const port = parseInt(`${process.env.PORT}`);
 
 app.use(helmet());
+app.use(cors());
 app.use(express.json());
 app.use(brasileiraoRoute);
 
-app.listen(port);
-console.log(`executando na porta ${port}`);
+export default app;

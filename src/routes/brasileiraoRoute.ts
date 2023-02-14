@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import brasileiraoController from '../controllers/brasileiraoController';
+import clubesController from '../controllers/clubesController';
 
 const router = Router();
 
-router.get('/', brasileiraoController.getConnectTest);
+router.get('/', clubesController.getConnectTest);
+router.get('/clubes', clubesController.getClubes);
 
 export default router;
