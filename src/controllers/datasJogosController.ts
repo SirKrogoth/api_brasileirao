@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import sequelize from '../database/data';
 import datasJogosRepository from '../models/datasJogosRepository';
 
 function getConnectTest(req: Request, res: Response, next: any){
@@ -34,7 +35,7 @@ async function getJogosDaRodada(req: Request, res: Response, next: any){
 
         const rodadas = await datasJogosRepository.findJogosDaRodada(numeroRodada);
 
-        if(rodadas === null || rodadas.length == 0) return res.status(400).end();
+        if(rodadas === null) return res.status(400).end();
         else res.json(rodadas);
 
     } catch (error) {
