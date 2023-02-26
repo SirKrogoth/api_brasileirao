@@ -6,6 +6,15 @@ function findAll(){
     return clubesModel.findAll<iClubesModel>();
 }
 
+function findOne(idClube: number){
+    return clubesModel.findOne<iClubesModel>({
+        where: {
+            'id': idClube
+        },
+    });
+}
+
 export default {
-    findAll
+    findAll,
+    findOne
 }

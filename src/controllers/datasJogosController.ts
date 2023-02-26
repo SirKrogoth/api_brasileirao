@@ -43,8 +43,26 @@ async function getJogosDaRodada(req: Request, res: Response, next: any){
     }
 }
 
+async function getJogosClube(req: Request, res: Response, next: any){
+    try {
+
+        const idClube = parseInt(req.params.idClube);
+
+        if(!idClube) return res.status(400).end();
+
+        const jogosDoClube = await datasJogosRepository.findJogosDoClube(idClube);
+
+        if(jogosDoClube === null) return res.status(400).end();
+        else res.json(jogosDoClube);
+
+    } catch (error) {
+        console.log(`Erro no Controller clubesController, function getJogosClube.\n Message: ${error}.`);
+    }
+}
+
 export default {
     getConnectTest,
     getDatasJogos,
-    getJogosDaRodada
+    getJogosDaRodada,
+    getJogosClube
 }

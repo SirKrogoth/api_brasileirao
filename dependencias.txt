@@ -22,3 +22,5 @@ npm i --save-dev @types/bcryptjs
 npm i sequelize mysql2
 npm i cors --save
 npm i --save-dev @types/cors
+npm install dotenv
+npm install --save http-status-codes

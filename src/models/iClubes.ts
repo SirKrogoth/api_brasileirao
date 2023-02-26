@@ -1,5 +1,6 @@
 export interface iClubes{
     id?: number,
     nome: string,
-    estado: string
+    estado: string,
+    estadio: string
 }

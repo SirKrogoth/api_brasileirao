@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import clubesRepository from '../models/clubesRepository';
-
+import { StatusCodes } from 'http-status-codes';
 
 function getConnectTest(req: Request, res: Response, next: any){
     //res.status(200).end();
@@ -20,7 +20,20 @@ async function getClubes(req: Request, res: Response, next: any){
     }
 }
 
+async function getClube(req: Request, res: Response, next: any){
+    try {
+        const idClube = parseInt(req.params.idClube);
+
+        const clube = await clubesRepository.findOne(idClube);
+
+        res.status(200).json(clube);
+    } catch (error) {
+        console.log('Erro no Controller clubesController, function getClube.\n Message: ' + error);
+    }
+}
+
 export default {
     getConnectTest,
-    getClubes
+    getClubes,
+    getClube
 }
