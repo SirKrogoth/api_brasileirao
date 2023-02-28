@@ -1,0 +1,39 @@
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('accounts', {
+      id: {
+        type: Sequelize.DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+      },
+      nome: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false
+      },
+      email: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false
+      },
+      password: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false
+      },
+      clubeFavorito: {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: true
+      }
+    });
+  },
+
+  async down (queryInterface, Sequelize) {
+    return queryInterface.dropTable('accounts');
+  }
+};
