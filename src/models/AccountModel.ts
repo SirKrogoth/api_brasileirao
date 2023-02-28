@@ -33,7 +33,11 @@ export default database.define<iAccountModel>('accounts', {
         allowNull: true
     },
     clubeFavorito: {
-        type: Sequelize.INTEGER,
-        allowNull: true
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: true,
+        references: {
+            model: 'clubes',
+            key: 'id'
+        }
     }
 });
