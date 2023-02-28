@@ -29,7 +29,7 @@ async function loginAccount(req: Request, res: Response, next: any){
             if(isValid)
             {
                 return res.status(statusCode.OK).json({
-                    "auth": "Autenticaded!"
+                    "auth": "Authorizaded!"
                 });
             }     
             

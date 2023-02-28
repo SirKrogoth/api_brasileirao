@@ -2,6 +2,7 @@ import { Router } from 'express';
 import clubesController from '../controllers/clubesController';
 import datasJogosController from '../controllers/datasJogosController';
 import accountController from '../controllers/accountController';
+import { validadeNewAccountSchema } from './accountSchemasMiddleware';
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.get('/clube/:idClube', clubesController.getClube);
 router.get('/datasJogo', datasJogosController.getDatasJogos);
 router.get('/jogosDaRodada/:rodada', datasJogosController.getJogosDaRodada);
 router.get('/getJogosClube/:idClube', datasJogosController.getJogosClube);
-router.post('/accounts/', accountController.addAccount);
+router.post('/accounts/', validadeNewAccountSchema, accountController.addAccount);
 router.post('/accounts/login', accountController.loginAccount);
 
 
