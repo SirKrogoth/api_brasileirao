@@ -22,9 +22,11 @@ npm i --save-dev @types/bcryptjs
 npm i sequelize mysql2
 npm i cors --save
 npm i --save-dev @types/cors
-npm install dotenv
+npm install dotenv-safe
 npm install --save http-status-codes
 npm install jsonwebtoken
 npm install --save-dev @types/jsonwebtoken
 npm install bcryptjs
 npm install --save-dev @types/bcryptjs
+npm i express body-parser
+npm i jsonwebtoken

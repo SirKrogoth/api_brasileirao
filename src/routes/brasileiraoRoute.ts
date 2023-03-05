@@ -2,17 +2,18 @@ import { Router } from 'express';
 import clubesController from '../controllers/clubesController';
 import datasJogosController from '../controllers/datasJogosController';
 import accountController from '../controllers/accountController';
-import { validadeNewAccountSchema } from './accountSchemasMiddleware';
+import { validadeNewAccountSchema, validateAuthorization } from './accountSchemasMiddleware';
 
 const router = Router();
 
 router.get('/', clubesController.getConnectTest);
-router.get('/clubes', clubesController.getClubes);
-router.get('/clube/:idClube', clubesController.getClube);
-router.get('/datasJogo', datasJogosController.getDatasJogos);
-router.get('/jogosDaRodada/:rodada', datasJogosController.getJogosDaRodada);
-router.get('/getJogosClube/:idClube', datasJogosController.getJogosClube);
-router.post('/accounts/', validadeNewAccountSchema, accountController.addAccount);
+router.get('/clubes', validateAuthorization, clubesController.getClubes);
+router.get('/clube/:idClube', validateAuthorization, clubesController.getClube);
+router.get('/datasJogo', validateAuthorization, datasJogosController.getDatasJogos);
+router.get('/jogosDaRodada/:rodada', validateAuthorization, datasJogosController.getJogosDaRodada);
+router.get('/getJogosClube/:idClube', validateAuthorization, datasJogosController.getJogosClube);
+router.get('/findAllAccounts', validateAuthorization, accountController.findAll);
+router.post('/addAccount/', validadeNewAccountSchema, validateAuthorization, accountController.addAccount);
 router.post('/accounts/login', accountController.loginAccount);
 
 

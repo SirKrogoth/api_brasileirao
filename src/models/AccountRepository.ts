@@ -10,11 +10,16 @@ function findByEmail(emailFilter: string){
     });
 }
 
-function add(account: iAccount){
+function addAccount(account: iAccount){
     return accountModel.create(account);
+}
+
+function findAll(){
+    return accountModel.findAll();
 }
 
 export default {
     findByEmail,
-    add
+    addAccount,
+    findAll
 }
