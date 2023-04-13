@@ -30,3 +30,4 @@ npm install bcryptjs
 npm install --save-dev @types/bcryptjs
 npm i express body-parser
 npm i jsonwebtoken
+npm i winston

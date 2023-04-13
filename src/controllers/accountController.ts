@@ -6,6 +6,7 @@ import repository from '../models/AccountRepository';
 import authentication from '../authentication';
 import authorization from '../authorization';
 
+
 async function addAccount(req: Request, res: Response, next: any){
     try {
         const newAccount = req.body as iAccount;

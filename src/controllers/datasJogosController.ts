@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import sequelize from '../database/data';
 import datasJogosRepository from '../models/datasJogosRepository';
+import { iDatasJogos } from 'src/models/iDatasJogos';
+import datasJogos from 'src/models/datasJogosModel';
 
 function getConnectTest(req: Request, res: Response, next: any){
     try {
@@ -56,7 +59,24 @@ async function getJogosClube(req: Request, res: Response, next: any){
         else res.json(jogosDoClube);
 
     } catch (error) {
-        console.log(`Erro no Controller clubesController, function getJogosClube.\n Message: ${error}.`);
+        console.log(`Erro no Controller datasJogosController, function getJogosClube.\n Message: ${error}.`);
+    }
+}
+
+async function postAddJogosRodada(req: Request, res: Response, next: any){
+    try {
+        
+        const iDatasJogos = req.body as iDatasJogos;
+
+        if(!iDatasJogos) return res.status(StatusCodes.NOT_FOUND).end();
+
+        const saved = await datasJogosRepository.addNewClubGame(iDatasJogos);
+
+        if(saved) res.status(StatusCodes.OK).json(saved);
+
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.BAD_REQUEST).end();
     }
 }
 
@@ -64,5 +84,6 @@ export default {
     getConnectTest,
     getDatasJogos,
     getJogosDaRodada,
-    getJogosClube
+    getJogosClube, 
+    postAddJogosRodada
 }

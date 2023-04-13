@@ -34,9 +34,14 @@ ASC`,
      });
 }
 
+function addNewClubGame(iDataJogos: iDatasJogos){
+    return datasJogosModel.create(iDataJogos);
+}
+
 
 export default {
     findAll,
     findJogosDaRodada,
-    findJogosDoClube
+    findJogosDoClube,
+    addNewClubGame
 }

@@ -15,6 +15,6 @@ router.get('/getJogosClube/:idClube', validateAuthorization, datasJogosControlle
 router.get('/findAllAccounts', validateAuthorization, accountController.findAll);
 router.post('/addAccount/', validadeNewAccountSchema, validateAuthorization, accountController.addAccount);
 router.post('/accounts/login', accountController.loginAccount);
-
+router.post('/addJogosDaRodada', validateAuthorization, datasJogosController.postAddJogosRodada);
 
 export default router;
