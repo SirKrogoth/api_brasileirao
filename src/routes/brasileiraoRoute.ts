@@ -13,8 +13,10 @@ router.get('/datasJogo', validateAuthorization, datasJogosController.getDatasJog
 router.get('/jogosDaRodada/:rodada', validateAuthorization, datasJogosController.getJogosDaRodada);
 router.get('/getJogosClube/:idClube', validateAuthorization, datasJogosController.getJogosClube);
 router.get('/findAllAccounts', validateAuthorization, accountController.findAll);
+router.get('/findClubByName/:nomeClube', validateAuthorization, clubesController.getClubByName);
 router.post('/addAccount/', validadeNewAccountSchema, validateAuthorization, accountController.addAccount);
 router.post('/accounts/login', accountController.loginAccount);
 router.post('/addJogosDaRodada', validateAuthorization, datasJogosController.postAddJogosRodada);
+router.post('/setScoreGame', validateAuthorization, datasJogosController.setScoreGame);
 
 export default router;

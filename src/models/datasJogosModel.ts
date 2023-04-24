@@ -16,27 +16,27 @@ const datasJogos =  dataBase.define<iDatasJogosModel>('datasJogos', {
     },
     data: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
     },
     hora: {
         type: Sequelize.TIME,
-        allowNull: false
+        allowNull: true
     },
     rodada: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     turno: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     timeCasa: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     timeFora: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull:true
     },
     golsTimeCasa: {
         type: Sequelize.INTEGER,

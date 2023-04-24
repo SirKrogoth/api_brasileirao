@@ -1,6 +1,7 @@
 import sequelize, { DestroyOptions, QueryTypes } from 'sequelize';
 import datasJogosModel, { iDatasJogosModel } from './datasJogosModel';
 import { iDatasJogos } from './iDatasJogos';
+import { Container } from 'winston';
 
 function findAll(){
     return datasJogosModel.findAll<iDatasJogosModel>();
@@ -8,7 +9,7 @@ function findAll(){
 
 function findJogosDaRodada(rodada: number){
 
-    return datasJogosModel.sequelize?.query(`SELECT dj.data, dj.hora, dj.rodada, dj.turno, (SELECT c.nome FROM clubes c WHERE dj.timeCasa = c.id) as timeCasa, (SELECT c.nome FROM clubes c WHERE dj.timeFora = c.id) as timeFora, dj.golsTimeCasa, dj.golsTimeFora FROM datasJogos as dj WHERE dj.rodada = ${rodada}`,
+    return datasJogosModel.sequelize?.query(`SELECT dj.id, dj.data, dj.hora, dj.rodada, dj.turno, (SELECT c.nome FROM clubes c WHERE dj.timeCasa = c.id) as timeCasa, (SELECT c.nome FROM clubes c WHERE dj.timeFora = c.id) as timeFora, dj.golsTimeCasa, dj.golsTimeFora FROM datasJogos as dj WHERE dj.rodada = ${rodada}`,
     {
         type: QueryTypes.SELECT
     });
@@ -38,10 +39,31 @@ function addNewClubGame(iDataJogos: iDatasJogos){
     return datasJogosModel.create(iDataJogos);
 }
 
+async function setScoreGame(scoreGame: iDatasJogos){
+
+    if(scoreGame.golsTimeCasa === null || scoreGame.golsTimeFora === null) return null;
+
+    const originalDataJogos = await datasJogosModel.findOne({
+        where: {
+            id: scoreGame.id
+        }
+    });
+
+    if(originalDataJogos === null) return null;   
+
+    originalDataJogos.golsTimeCasa = scoreGame.golsTimeCasa;
+    originalDataJogos.golsTimeFora = scoreGame.golsTimeFora;
+
+    const result = await originalDataJogos.save();
+    scoreGame.id = result.id;
+
+    return scoreGame;
+}
 
 export default {
     findAll,
     findJogosDaRodada,
     findJogosDoClube,
-    addNewClubGame
+    addNewClubGame,
+    setScoreGame
 }

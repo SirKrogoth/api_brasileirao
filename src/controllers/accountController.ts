@@ -3,7 +3,6 @@ import { iAccount } from '../models/iAccount';
 import statusCode from 'http-status-codes';
 import hashPassword from '../authentication';
 import repository from '../models/AccountRepository';
-import authentication from '../authentication';
 import authorization from '../authorization';
 
 

@@ -1,4 +1,3 @@
-import { DestroyOptions } from "sequelize";
 import accountModel, { iAccountModel } from './AccountModel';
 import { iAccount } from "./iAccount";
 

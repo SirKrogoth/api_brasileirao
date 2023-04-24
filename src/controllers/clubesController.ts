@@ -32,8 +32,22 @@ async function getClube(req: Request, res: Response, next: any){
     }
 }
 
+async function getClubByName(req: Request, res: Response, next: any){
+    try {
+        const nomeClube = req.params['nomeClube'];
+
+        const clubes = await clubesRepository.findByName(nomeClube);
+
+        res.status(StatusCodes.OK).json(clubes);
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).end();
+        console.log('Erro no Controller clubesController, function getClubByName.\n Message: ' + error);
+    }
+}
+
 export default {
     getConnectTest,
     getClubes,
-    getClube
+    getClube,
+    getClubByName
 }

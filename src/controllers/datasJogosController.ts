@@ -80,10 +80,26 @@ async function postAddJogosRodada(req: Request, res: Response, next: any){
     }
 }
 
+async function setScoreGame(req: Request, res: Response, next: any){
+    try {
+        const score = req.body as iDatasJogos;
+
+        const result = await datasJogosRepository.setScoreGame(score);
+
+        if(result === null) return res.status(StatusCodes.BAD_REQUEST).end();
+
+        res.status(StatusCodes.OK).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.BAD_REQUEST).end();
+    }
+}
+
 export default {
     getConnectTest,
     getDatasJogos,
     getJogosDaRodada,
     getJogosClube, 
-    postAddJogosRodada
+    postAddJogosRodada,
+    setScoreGame
 }
