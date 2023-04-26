@@ -35,6 +35,30 @@ ASC`,
      });
 }
 
+function findLatestResultsForClub(idClube: number){
+    return datasJogosModel.sequelize?.query(`SELECT dj.rodada as Rodada,
+    dj.turno as Turno,
+    dj.data as DataJogo,
+    dj.hora as Horario,
+    (SELECT c.nome FROM clubes c WHERE dj.timeCasa = c.id) as timeCasa,
+    (SELECT c.nome FROM clubes c WHERE dj.timeFora = c.id) as timeFora,
+    (SELECT dj.golsTimeCasa FROM clubes c WHERE dj.timeCasa = c.id) as golsTimeCasa,
+    (SELECT dj.golsTimeFora FROM clubes c WHERE dj.timeFora = c.id) as golsTimeFora
+    FROM datasJogos as dj
+ WHERE
+     (dj.timeCasa = ${idClube}
+     OR
+     dj.timeFora = ${idClube})
+     AND
+     golsTimeCasa IS NOT NULL
+ORDER BY 
+     dj.rodada 
+ASC`,
+     {
+        type: QueryTypes.SELECT
+     });
+}
+
 function addNewClubGame(iDataJogos: iDatasJogos){
     return datasJogosModel.create(iDataJogos);
 }
@@ -65,5 +89,6 @@ export default {
     findJogosDaRodada,
     findJogosDoClube,
     addNewClubGame,
-    setScoreGame
+    setScoreGame,
+    findLatestResultsForClub
 }

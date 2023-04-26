@@ -56,10 +56,28 @@ async function getJogosClube(req: Request, res: Response, next: any){
         const jogosDoClube = await datasJogosRepository.findJogosDoClube(idClube);
 
         if(jogosDoClube === null) return res.status(400).end();
-        else res.json(jogosDoClube);
+        else res.status(StatusCodes.OK).json(jogosDoClube);
 
     } catch (error) {
         console.log(`Erro no Controller datasJogosController, function getJogosClube.\n Message: ${error}.`);
+    }
+}
+
+async function getLatestsResultsForClub(req: Request, res: Response, next: any){
+    try {
+        const idClub = parseInt(req.params.idClub);
+
+        if(!idClub) return res.status(StatusCodes.BAD_REQUEST).end();
+
+        const latestsResults = await datasJogosRepository.findLatestResultsForClub(idClub);
+
+        if(latestsResults === null) return res.status(StatusCodes.BAD_REQUEST).end();
+
+        res.status(StatusCodes.OK).json(latestsResults);
+
+    } catch (error) {
+        console.log(error);
+        res.status(StatusCodes.BAD_REQUEST).end();
     }
 }
 
@@ -101,5 +119,6 @@ export default {
     getJogosDaRodada,
     getJogosClube, 
     postAddJogosRodada,
-    setScoreGame
+    setScoreGame,
+    getLatestsResultsForClub
 }
