@@ -101,6 +101,7 @@ async function postAddJogosRodada(req: Request, res: Response, next: any){
 async function setScoreGame(req: Request, res: Response, next: any){
     try {
         const score = req.body as iDatasJogos;
+        if(!score) return res.status(StatusCodes.BAD_REQUEST).end();
 
         const result = await datasJogosRepository.setScoreGame(score);
 

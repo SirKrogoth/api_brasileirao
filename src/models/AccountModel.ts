@@ -1,7 +1,6 @@
 import Sequelize, { Model, Optional } from "sequelize";
 import { iAccount } from "./iAccount";
 import database from '../database/data';
-import { allow } from "joi";
 
 interface iAccountCreationAttributes extends Optional<iAccount, "id">{}
 

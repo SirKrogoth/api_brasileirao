@@ -1,7 +1,8 @@
 npm init
 npm install express
 npm i --save-dev @types/express
-//O Helmet pode ajudar a proteger o seu aplicativo de algumas vulnerabilidades da web bastante conhecidas configurando os cabeçalhos HTTP adequadamente.
+//O Helmet pode ajudar a proteger o seu aplicativo de algumas vulnerabilidades da web 
+//bastante conhecidas configurando os cabeçalhos HTTP adequadamente.
 npm i helmet
 //instalar o type-script
 npm install typescript
