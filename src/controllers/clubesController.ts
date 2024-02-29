@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import clubesRepository from '../models/clubesRepository';
 import { StatusCodes } from 'http-status-codes';
+import { iClubes } from '../models/iClubes';
 
 function getConnectTest(req: Request, res: Response, next: any){
     //res.status(200).end();
@@ -45,9 +46,28 @@ async function getClubByName(req: Request, res: Response, next: any){
     }
 }
 
+async function addClub(req: Request, res: Response, next: any){
+    try {
+        const club = req.body as iClubes;
+
+        const newClub = await clubesRepository.addClub(club);
+
+        console.log(newClub);
+
+        if(newClub === null){
+            res.status(409).end();
+        } else {
+            res.status(201).json(newClub);
+        }
+    } catch (error) {
+        res.status(400).end();
+    }
+}
+
 export default {
     getConnectTest,
     getClubes,
     getClube,
-    getClubByName
+    getClubByName,
+    addClub
 }

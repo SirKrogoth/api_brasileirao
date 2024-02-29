@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('accounts', {
+    await queryInterface.createTable('clubes', {
       id: {
         type: Sequelize.DataTypes.INTEGER,
         primaryKey: true,
@@ -11,29 +11,29 @@ module.exports = {
         allowNull: false
       },
       nome: {
-        type: Sequelize.DataTypes.STRING,
+        type: Sequelize.DataTypes.STRING(100),
         allowNull: false
       },
-      email: {
-        type: Sequelize.DataTypes.STRING,
+      estado: {
+        type: Sequelize.DataTypes.STRING(2),
         allowNull: false
       },
-      password: {
-        type: Sequelize.DataTypes.STRING,
+      estadio: {
+        type: Sequelize.DataTypes.STRING(50),
         allowNull: false
       },
-      status: {
-        type: Sequelize.DataTypes.INTEGER,
+      createdAt: {
+        type: Sequelize.DATE,
         allowNull: false
       },
-      clubeFavorito: {
-        type: Sequelize.DataTypes.INTEGER,
-        allowNull: true
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
       }
-    });
+    })
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.dropTable('accounts');
+    return queryInterface.dropTable('clubes');
   }
 };

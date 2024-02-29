@@ -1,5 +1,6 @@
 import { QueryInterface, QueryTypes } from 'sequelize';
 import clubesModel, { iClubesModel } from './clubesModel';
+import { iClubes } from './iClubes';
 
 function findAll(){
     return clubesModel.findAll<iClubesModel>();
@@ -20,8 +21,13 @@ function findByName(clube: string){
     });
 }
 
+function addClub(clube: iClubes){
+    return clubesModel.create(clube);
+}
+
 export default {
     findAll,
     findOne,
-    findByName
+    findByName,
+    addClub
 }

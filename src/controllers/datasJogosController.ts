@@ -121,5 +121,5 @@ export default {
     getJogosClube, 
     postAddJogosRodada,
     setScoreGame,
-    getLatestsResultsForClub
+    getLatestsResultsForClub    
 }
