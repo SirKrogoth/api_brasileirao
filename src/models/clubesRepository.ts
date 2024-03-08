@@ -25,9 +25,20 @@ function addClub(clube: iClubes){
     return clubesModel.create(clube);
 }
 
+function updateEscudoClube(escudo: string, codigo: number){
+    return clubesModel.update({
+        escudo: escudo
+    }, {
+        where: {
+            id: codigo
+        }
+    });
+}
+
 export default {
     findAll,
     findOne,
     findByName,
-    addClub
+    addClub,
+    updateEscudoClube
 }

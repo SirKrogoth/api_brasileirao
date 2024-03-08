@@ -3,4 +3,5 @@ export interface iClubes{
     nome: string,
     estado: string,
     estadio: string
+    escudo: string;
 }

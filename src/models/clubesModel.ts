@@ -24,5 +24,9 @@ export default database.define<iClubesModel>('clubes', {
     estadio: {
         type: Sequelize.STRING(50),
         allowNull: true
+    },
+    escudo: {
+        type: Sequelize.STRING,
+        allowNull: true
     }
 });

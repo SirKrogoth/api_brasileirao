@@ -48,19 +48,46 @@ async function getClubByName(req: Request, res: Response, next: any){
 
 async function addClub(req: Request, res: Response, next: any){
     try {
-        const club = req.body as iClubes;
+        const club = req.body;        
 
-        const newClub = await clubesRepository.addClub(club);
+        if(!req.file){
+            throw new Error("Erro ao receber arquivo no servidor.");
+        } else{
+            const { filename: escudo } = req.file;
 
-        console.log(newClub);
+            club.escudo = escudo;
+            const newClub = await clubesRepository.addClub(club);
 
-        if(newClub === null){
-            res.status(409).end();
-        } else {
-            res.status(201).json(newClub);
+            if(newClub === null){
+                res.status(409).end();
+            } else {
+                res.status(201).json(newClub);
+            }
         }
     } catch (error) {
         res.status(400).end();
+    }
+}
+
+async function updateEscudoClube(req: Request, res: Response, next: any){
+    try {        
+        const request = req.body;
+
+        if(!req.file){
+            throw new Error("Erro ao receber arquivo no servidor.");
+        } else{
+            const { filename: escudo } = req.file;
+
+            await clubesRepository.updateEscudoClube(escudo, parseInt(request.id));
+
+            res.status(StatusCodes.OK).json({
+                statusCode: 200,
+                message: "Escudo atualizado com sucesso"
+            }).end();
+        }
+        
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).json(error).end();
     }
 }
 
@@ -69,5 +96,6 @@ export default {
     getClubes,
     getClube,
     getClubByName,
-    addClub
+    addClub,
+    updateEscudoClube
 }
