@@ -15,7 +15,7 @@ router.get('/clubes', clubesController.getClubes);
 router.get('/clube/:idClube', validateAuthorization, clubesController.getClube);
 router.get('/datasJogo', validateAuthorization, datasJogosController.getDatasJogos);
 router.get('/jogosDaRodada/:rodada', validateAuthorization, datasJogosController.getJogosDaRodada);
-router.get('/getJogosClube/:idClube', validateAuthorization, datasJogosController.getJogosClube);
+router.get('/getJogosClube/:idClube', datasJogosController.getJogosClube);
 router.get('/getLatestsResultsForClub/:idClub', validateAuthorization, datasJogosController.getLatestsResultsForClub);
 router.get('/findAllAccounts', validateAuthorization, accountController.findAll);
 router.get('/findClubByName/:nomeClube', validateAuthorization, clubesController.getClubByName);
